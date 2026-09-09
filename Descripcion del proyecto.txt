@@ -1,0 +1,339 @@
+[8/29/2026 12:44 AM] Cesar Soto 🐐: MÓDULO 1 — LOGIN Y REGISTRO
+1. Objetivo
+Crear el sistema de acceso y registro de la aplicación, diferenciando entre dos tipos de usuarios:
+• Barberos
+• Clientes
+El sistema debe permitir que un barbero cree su cuenta, seleccione un plan y realice el pago correspondiente.
+Una vez completado el registro, el sistema generará automáticamente un código único para ese barbero.
+El cliente utilizará ese código durante su registro para quedar asociado directamente con el barbero correspondiente.
+La relación principal en esta primera versión será:
+BARBERO ↔ CLIENTE
+No se utilizará todavía la barbería como entidad principal para establecer la relación entre usuarios.
+ 
+⸻
+ 
+2. Pantalla inicial
+Al abrir la aplicación, el usuario deberá elegir qué tipo de cuenta desea utilizar.
+Opciones
+• Soy Barbero
+• Soy Cliente
+Cada opción llevará al flujo correspondiente.
+ 
+⸻
+ 
+3. REGISTRO DEL BARBERO
+Cuando el usuario seleccione “Soy Barbero”, comenzará el proceso de creación de su cuenta.
+Información del barbero
+El sistema solicitará:
+• Nombre
+• Apellido
+• Nombre de la barbería
+• Ubicación de la barbería
+• Número de teléfono
+• Correo electrónico
+• Contraseña
+• Confirmación de contraseña
+La información de la barbería será información complementaria del perfil del barbero.
+La relación principal del sistema seguirá siendo directamente:
+Barbero → Clientes
+ 
+⸻
+ 
+4. SELECCIÓN DEL PLAN
+Durante el proceso de registro, el barbero deberá seleccionar uno de los planes disponibles.
+Los planes podrán variar en:
+• Precio
+• Funciones disponibles
+• Límites de uso
+• Beneficios
+• Servicios incluidos
+Ejemplo:
+• Plan Básico
+• Plan Profesional
+• Plan Premium
+Los precios y características específicas de cada plan serán definidos posteriormente en el módulo correspondiente.
+ 
+⸻
+ 
+5. PAGO DEL BARBERO
+El barbero deberá completar el pago correspondiente al plan seleccionado.
+El sistema deberá registrar:
+• Plan seleccionado
+• Precio
+• Estado del pago
+• Estado de la suscripción
+• Fecha de inicio
+• Próxima fecha de cobro
+• Método de pago, cuando corresponda
+Regla principal
+La cuenta del barbero deberá quedar correctamente activada después de confirmar el proceso de suscripción/pago.
+Si el pago no es completado o existe un problema con la suscripción, el sistema deberá manejar el estado correspondiente y limitar el acceso según las reglas que definamos posteriormente.
+ 
+⸻
+ 
+6. GENERACIÓN DEL CÓDIGO ÚNICO DEL BARBERO
+Después de completar correctamente el registro y activar su cuenta, el sistema generará automáticamente un código único para el barbero.
+Ejemplo:
+BARB-7X92K
+Este código:
+• Será único.
+• Estará asociado exclusivamente a ese barbero.
+• Permitirá identificar al barbero dentro del sistema.
+• Será utilizado por los clientes para registrarse con ese barbero.
+• No podrá existir otro barbero con el mismo código.
+El código público del barbero será diferente del identificador interno utilizado por el sistema.
+Importante
+ID interno del sistema ≠ Código público del barbero
+El ID interno será utilizado para la identificación técnica de la cuenta.
+El código público será el código que el barbero compartirá con sus clientes.
+ 
+⸻
+ 
+7. PERFIL DEL BARBERO
+Una vez creada la cuenta, el barbero podrá visualizar su código único.
+Ejemplo:
+Tu código de barbero
+
+BARB-7X92K
+Debe existir una opción para:
+• Copiar código
+• Compartir código
+En una versión futura también podremos agregar:
+• Código QR
+• Compartir directamente mediante aplicaciones
+• Enlace de invitación
+Estas funciones pueden desarrollarse posteriormente.
+ 
+⸻
+ 
+8. REGISTRO DEL CLIENTE
+Cuando el usuario seleccione “Soy Cliente”, comenzará el proceso de registro.
+Información del cliente
+El sistema solicitará:
+• Nombre
+• Apellido
+• Número de teléfono
+• Correo electrónico
+• Contraseña
+• Confirmación de contraseña
+• Código del barbero
+El código del barbero será obligatorio para completar el registro, según la lógica inicial del sistema.
+ 
+⸻
+ 
+9. CÓDIGO DEL BARBERO
+Durante el registro, el cliente deberá introducir el código proporcionado por su barbero.
+Ejemplo:
+BARB-7X92K
+[8/29/2026 12:44 AM] Cesar Soto 🐐: El sistema deberá validar el código antes de completar el registro.
+Flujo
+Cliente introduce código
+↓
+Sistema verifica código
+↓
+¿Código válido?
+Sí
+El sistema identifica al barbero correspondiente.
+↓
+El cliente queda asociado al barbero.
+↓
+Se completa el registro.
+No
+El sistema muestra un mensaje indicando que el código no es válido.
+El cliente podrá corregirlo e intentarlo nuevamente.
+ 
+⸻
+ 
+10. RELACIÓN BARBERO — CLIENTE
+Una vez que el cliente complete correctamente su registro utilizando el código del barbero:
+Cliente → Barbero
+El sistema deberá guardar esta relación.
+Ejemplo:
+Barbero
+Carlos Rodríguez
+Código:
+BARB-7X92K
+↓
+Cliente
+Juan Pérez
+↓
+Relación
+Juan Pérez está asociado con Carlos Rodríguez.
+Esta relación será utilizada posteriormente por otros módulos de la aplicación.
+ 
+⸻
+ 
+11. CÓDIGO INVÁLIDO
+Si el cliente introduce un código que no existe, el registro no deberá completarse.
+El sistema mostrará un mensaje claro, por ejemplo:
+Código no válido
+
+Verifica el código proporcionado por tu barbero e inténtalo nuevamente.
+El cliente podrá modificar el código y volver a validarlo.
+ 
+⸻
+ 
+12. LOGIN
+Una vez que la cuenta haya sido creada, tanto los barberos como los clientes podrán iniciar sesión.
+Login del Barbero
+El barbero proporcionará sus credenciales.
+↓
+El sistema verifica la cuenta.
+↓
+El sistema verifica el estado de la suscripción.
+↓
+Si todo está correcto:
+Dashboard del Barbero
+ 
+⸻
+ 
+Login del Cliente
+El cliente proporcionará sus credenciales.
+↓
+El sistema verifica la cuenta.
+↓
+El sistema identifica al barbero asociado.
+↓
+Dashboard del Cliente
+ 
+⸻
+ 
+13. ESTADOS DE LA CUENTA DEL BARBERO
+El sistema deberá contemplar diferentes estados.
+ACTIVA
+La suscripción está activa y el barbero tiene acceso a las funciones correspondientes a su plan.
+PRUEBA
+Si posteriormente se ofrece un período de prueba, la cuenta podrá tener este estado.
+PAGO PENDIENTE
+Existe un problema con el pago o la renovación.
+CANCELADA
+El barbero canceló su suscripción.
+SUSPENDIDA
+La cuenta fue suspendida por una razón administrativa o por incumplimiento de las reglas del servicio.
+Los comportamientos específicos de cada estado serán definidos posteriormente en el módulo de suscripciones y pagos.
+ 
+⸻
+ 
+14. SEGURIDAD Y VALIDACIÓN
+El sistema deberá garantizar que cada código pertenezca a un único barbero.
+El cliente no deberá poder seleccionar manualmente al barbero.
+La asociación deberá realizarse mediante la validación del código.
+Flujo seguro
+Cliente introduce código
+↓
+Sistema valida código
+↓
+Sistema encuentra el ID interno del barbero
+↓
+Sistema crea la relación entre cliente y barbero
+↓
+Cliente queda asociado al barbero correcto
+El cliente no deberá tener acceso al ID interno del barbero.
+ 
+⸻
+ 
+15. IDENTIFICACIÓN INTERNA
+Cada barbero deberá tener un identificador interno único dentro del sistema.
+Este identificador será utilizado para las relaciones internas de la aplicación.
+Ejemplo conceptual:
+Barbero
+• ID interno: UID-XXXXXXXX
+• Código público: BARB-7X92K
+El cliente utilizará únicamente el código público.
+El sistema utilizará el ID interno para establecer y mantener las relaciones.
+ 
+⸻
+ 
+16. ESTRUCTURA GENERAL DEL MÓDULO
+Entrada de la aplicación
+LOGIN / REGISTRO
+↓
+¿Qué tipo de usuario eres?
+BARBERO
+o
+CLIENTE
+ 
+⸻
+ 
+Flujo del Barbero
+Soy Barbero
+↓
+Registro
+↓
+Información personal
+↓
+Información de barbería
+↓
+Selección del plan
+↓
+Pago / Suscripción
+↓
+Activación de cuenta
+↓
+Generación del código único
+↓
+Código disponible en el perfil
+↓
+Dashboard del Barbero
+ 
+⸻
+ 
+Flujo del Cliente
+Soy Cliente
+↓
+Registro
+↓
+Información personal
+↓
+Introducir código del barbero
+↓
+Validar código
+↓
+Identificar barbero
+↓
+Crear relación Barbero ↔ Cliente
+↓
+Completar registro
+↓
+Dashboard del Cliente
+ 
+⸻
+ 
+17. REGLAS PRINCIPALES DEL MÓDULO
+1. Deben existir dos tipos principales de usuarios:  
+ • Barbero
+• Cliente
+1. El barbero deberá registrarse y seleccionar un plan.
+2. El barbero deberá completar el proceso de pago/suscripción correspondiente.
+3. Cada barbero recibirá automáticamente un código único.
+4. El código será utilizado por los clientes para registrarse con ese barbero.
+5.
+[8/29/2026 12:44 AM] Cesar Soto 🐐: Cada código deberá pertenecer exclusivamente a un barbero.
+6. El cliente deberá introducir un código válido para completar su asociación.
+7. El sistema deberá validar el código antes de crear la relación.
+8. La relación inicial será directamente: Barbero ↔ Cliente
+9. El nombre y ubicación de la barbería serán información del perfil del barbero, pero no serán la entidad principal de asociación en esta primera versión.
+10. El sistema deberá mantener un ID interno independiente del código público.
+11. Los módulos futuros podrán utilizar la relación existente entre el barbero y sus clientes.
+ 
+⸻
+ 
+18. RESULTADO ESPERADO
+Al finalizar este módulo deberá existir un sistema capaz de:
+• Registrar barberos.
+• Registrar clientes.
+• Diferenciar ambos tipos de usuarios.
+• Permitir al barbero seleccionar un plan.
+• Gestionar la activación mediante suscripción/pago.
+• Generar un código único para cada barbero.
+• Permitir al barbero visualizar y compartir su código.
+• Permitir al cliente introducir el código.
+• Validar el código.
+• Identificar al barbero correcto.
+• Asociar automáticamente al cliente con el barbero.
+• Mantener un identificador interno independiente del código público.
+• Dirigir a cada usuario al dashboard correspondiente después del login.
+ 
+⸻
+ 
+FIN DEL MÓDULO 1
